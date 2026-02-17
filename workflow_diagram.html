@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Workflow Pipeline — Interactive Diagram</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./main.css">
+    
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+    <div class="container">
+      <header class="header">
+        <div class="badge badge-chat">Capstone Project</div>
+        <h1>AI-Powered Workflow Pipeline</h1>
+        <p>
+          Automating API development by chaining <strong>Chat AI</strong>,
+          <strong>IDE AI</strong>, and <strong>CLI AI</strong> — transforming a
+          natural language description into production-ready code with tests.
+        </p>
+      </header>
+
+      <div class="pipeline">
+        <!-- STAGE 1 -->
+        <div
+          class="stage-card stage-1"
+          id="stage1"
+          onclick="toggleStage('stage1')"
+        >
+          <div class="stage-header">
+            <div class="stage-number">1</div>
+            <div>
+              <span class="badge badge-chat">Chat AI</span>
+              <div class="stage-title">Generate OpenAPI Specification</div>
+              <div class="stage-subtitle">
+                Antigravity Chat → Structured JSON Output
+              </div>
+            </div>
+          </div>
+          <div class="stage-io">
+            <div class="io-box io-input">
+              <span class="io-label">Input</span>
+              Natural language description of a Task Management API with CRUD
+              endpoints
+            </div>
+            <span class="io-arrow">→</span>
+            <div class="io-box io-output">
+              <span class="io-label">Output</span>
+              OpenAPI 3.0 JSON spec with schemas, paths, and validation rules
+            </div>
+          </div>
+          <div class="click-hint">Click to expand prompt & details ↓</div>
+          <div class="stage-details">
+            <div class="detail-section">
+              <h4>Prompt Used</h4>
+              <div class="prompt-box">
+                "Generate a complete OpenAPI 3.0 JSON specification for a task
+                management API called TaskFlow. It should support: - Creating
+                tasks with title (required), description, priority
+                (low/medium/high/critical), assignee email, and due date -
+                Listing all tasks with optional status/priority filters -
+                Getting a single task by ID - Updating any task field - Deleting
+                a task Include proper validation constraints (min/max length,
+                email format, date-time format) and standardized error response
+                schemas."
+              </div>
+            </div>
+            <div class="detail-section">
+              <h4>Files Generated</h4>
+              <ul class="files-list">
+                <li>
+                  <span class="file-name">api_spec.json</span> — 165-line
+                  OpenAPI 3.0 specification
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONNECTOR 1→2 -->
+        <div class="connector">
+          <div class="connector-line"></div>
+          <span class="connector-label">JSON spec feeds into IDE</span>
+          <div class="connector-arrow"></div>
+        </div>
+
+        <!-- STAGE 2 -->
+        <div
+          class="stage-card stage-2"
+          id="stage2"
+          onclick="toggleStage('stage2')"
+        >
+          <div class="stage-header">
+            <div class="stage-number">2</div>
+            <div>
+              <span class="badge badge-ide">IDE AI</span>
+              <div class="stage-title">Scaffold Express.js Application</div>
+              <div class="stage-subtitle">
+                Antigravity IDE Agent → Code Generation
+              </div>
+            </div>
+          </div>
+          <div class="stage-io">
+            <div class="io-box io-input">
+              <span class="io-label">Input</span>
+              OpenAPI 3.0 JSON spec (api_spec.json from Stage 1)
+            </div>
+            <span class="io-arrow">→</span>
+            <div class="io-box io-output">
+              <span class="io-label">Output</span>
+              Express.js server + Joi validation + route handlers
+            </div>
+          </div>
+          <div class="click-hint">Click to expand prompt & details ↓</div>
+          <div class="stage-details">
+            <div class="detail-section">
+              <h4>Prompt Used</h4>
+              <div class="prompt-box">
+                "Read the api_spec.json OpenAPI specification and generate a
+                complete Express.js application: 1. server.js — Express app with
+                middleware and route mounting 2. validation.js — Joi schemas
+                derived from the OpenAPI component schemas (CreateTaskInput,
+                UpdateTaskInput, query params) 3. routes/tasks.js — Route
+                handlers for each operationId (listTasks, createTask, getTask,
+                updateTask, deleteTask) Use an in-memory Map as the data store.
+                Include proper error handling with the Error schema format from
+                the spec."
+              </div>
+            </div>
+            <div class="detail-section">
+              <h4>Files Generated</h4>
+              <ul class="files-list">
+                <li>
+                  <span class="file-name">server.js</span> — Express app setup
+                </li>
+                <li>
+                  <span class="file-name">validation.js</span> — Joi validation
+                  schemas
+                </li>
+                <li>
+                  <span class="file-name">routes/tasks.js</span> — 5 CRUD
+                  handlers
+                </li>
+                <li>
+                  <span class="file-name">package.json</span> — Dependencies
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONNECTOR 2→3 -->
+        <div class="connector">
+          <div class="connector-line"></div>
+          <span class="connector-label">Source code feeds into CLI</span>
+          <div class="connector-arrow"></div>
+        </div>
+
+        <!-- STAGE 3 -->
+        <div
+          class="stage-card stage-3"
+          id="stage3"
+          onclick="toggleStage('stage3')"
+        >
+          <div class="stage-header">
+            <div class="stage-number">3</div>
+            <div>
+              <span class="badge badge-cli">CLI AI</span>
+              <div class="stage-title">Generate & Execute Test Suite</div>
+              <div class="stage-subtitle">
+                Antigravity CLI → Jest Tests + Execution
+              </div>
+            </div>
+          </div>
+          <div class="stage-io">
+            <div class="io-box io-input">
+              <span class="io-label">Input</span>
+              Source code files (server.js, routes/tasks.js, validation.js)
+            </div>
+            <span class="io-arrow">→</span>
+            <div class="io-box io-output">
+              <span class="io-label">Output</span>
+              21 passing tests covering happy paths, errors & edge cases
+            </div>
+          </div>
+          <div class="click-hint">Click to expand prompt & details ↓</div>
+          <div class="stage-details">
+            <div class="detail-section">
+              <h4>Prompt Used</h4>
+              <div class="prompt-box">
+                "Analyze the source code in server.js, routes/tasks.js, and
+                validation.js. Generate a comprehensive Jest + Supertest
+                integration test suite that covers: - Happy path for each CRUD
+                operation - Validation error paths (missing title, invalid
+                priority, bad email, etc.) - Edge cases (empty list, 404s, empty
+                update body) - Status/priority query filtering Then run 'npx
+                jest --verbose' and report results."
+              </div>
+            </div>
+            <div class="detail-section">
+              <h4>Files Generated & Results</h4>
+              <ul class="files-list">
+                <li>
+                  <span class="file-name">tests/tasks.test.js</span> — 21 test
+                  cases
+                </li>
+              </ul>
+              <div
+                style="
+                  margin-top: 12px;
+                  padding: 12px;
+                  background: rgba(16, 185, 129, 0.1);
+                  border-radius: 8px;
+                  border: 1px solid rgba(16, 185, 129, 0.2);
+                  font-size: 0.85rem;
+                  color: #34d399;
+                  font-weight: 600;
+                "
+              >
+                ✅ Test Suites: 1 passed &nbsp;|&nbsp; Tests: 21 passed, 21
+                total
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results banner -->
+        <div class="results-banner">
+          <h3>✅ Pipeline Complete — End-to-End Verified</h3>
+          <p style="font-size: 0.9rem; color: #94a3b8">
+            From natural language → production-ready API with full test coverage
+          </p>
+          <div class="results-stats">
+            <div class="stat">
+              <div class="stat-value">3</div>
+              <div class="stat-label">AI Stages</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">6</div>
+              <div class="stat-label">Files Generated</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">21</div>
+              <div class="stat-label">Tests Passing</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">~5min</div>
+              <div class="stat-label">Total Time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        AI-Powered Workflow Capstone — Abraham Jimah Zorwi — Feb 2026
+      </footer>
+    </div>
+
+    <script>
+      function toggleStage(id) {
+        const card = document.getElementById(id);
+        const wasActive = card.classList.contains("active");
+
+        // Close all
+        document
+          .querySelectorAll(".stage-card")
+          .forEach((c) => c.classList.remove("active"));
+
+        // Toggle the clicked one
+        if (!wasActive) {
+          card.classList.add("active");
+        }
+      }
+
+      // Auto-open stage 1 on load for discoverability
+      window.addEventListener("load", () => {
+        setTimeout(() => toggleStage("stage1"), 600);
+      });
+    </script>
+  </body>
+</html>
